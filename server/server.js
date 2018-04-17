@@ -1,3 +1,6 @@
+require('./config/config')
+
+
 const express =require('express');
 const bodyParser =require('body-parser');
 const _= require('lodash');
@@ -11,7 +14,7 @@ const {User} =require('./models/user');
 
 var app =express();
 
-const port =process.env.PORT || 3000;
+const port =process.env.PORT;
 
 app.use(bodyParser.json());
 
