@@ -80,7 +80,7 @@ UserSchema.statics.findByCredentials = function(email,password){
     if(!user){
       return Promise.reject();
     }
-    
+
     return new Promise((resolve,reject)=>{
       if(bcrypt.compareSync(password, user.password)){
         resolve(user);
@@ -89,6 +89,18 @@ UserSchema.statics.findByCredentials = function(email,password){
       }
     })
   })
+};
+
+UserSchema.methods.removeToken = function(token){
+  var user = this;
+
+  return user.update({
+    $pull:{
+      tokens:{
+        token:token
+      }
+    }
+  });
 };
 
 UserSchema.pre('save', function(next){
